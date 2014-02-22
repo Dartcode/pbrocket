@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://www.purebasic.com/namespace" version="1.0" creator="PureBasic 5.21 LTS (Windows - x86)">
+  <section name="config">
+    <options closefiles="1" openmode="0" name="PBRocket Editor"/>
+  </section>
+  <section name="data">
+    <explorer view="" pattern="0"/>
+    <log show="1"/>
+    <lastopen date="2014-02-22 18:37" user="Den64" host="DEN-TOSH64"/>
+  </section>
+  <section name="files">
+    <file name="PBRocket_editor.pb">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
+      <fingerprint md5="c13dd51d057951f8365bfe13460f00d8"/>
+    </file>
+    <file name="PBRocket_server.pbi">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
+      <fingerprint md5="8b01d755837483868387bfe9b7f45651"/>
+    </file>
+    <file name="PBRocket_xml.pbi">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
+      <fingerprint md5="781e8c244f49dded6ec1bcf0e025494b"/>
+    </file>
+    <file name="PBRocket_undo.pbi">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
+      <fingerprint md5="0faec3a60fb4f74020d4bfde8e3bdbef"/>
+    </file>
+  </section>
+  <section name="targets">
+    <target name="Default Target" enabled="1" default="1">
+      <inputfile value="PBRocket_editor.pb"/>
+      <outputfile value="pbrocketeditor.exe"/>
+      <executable value="C:\Users\Den64\Desktop\pbrocket_demo\PBRocketEditor.exe"/>
+      <options unicode="1" xpskin="1"/>
+      <temporaryexe value="source"/>
+    </target>
+  </section>
+</project>

@@ -1,0 +1,51 @@
+/* adapted from https://github.com/kusma/rocket */
+
+Interpolation modes
+-------------------
+Each keyframe has an interpolation mode associated with it, and that
+interpolation mode is valid until the next keyframe is reached. The different
+interpolation modes are the following:
+
+* Step   : This is the simplest mode, and always returns the key's value.
+* Linear : This does a linear interpolation between the current and the next
+           key's values.
+* Smooth : This interpolates in a smooth fashion, the exact function is what
+           is usually called "smoothstep". Do not confuse this mode with
+           splines; this only interpolates smoothly between two different
+           values, it does not try to calculate tangents or any such things.
+* Ramp   : This is similar to "Linear", but additionally applies an
+           exponentiation of the interpolation factor.
+
+Keyboard shortcuts
+-------------------
+Some of the GNU Rocket editor's features are available through the menu and
+some keyboard shortcut. Here's a list of the supported keyboard shortcuts:
+
+Ctrl+O (or F5)            Open file
+Ctrl+N (or F6)            New
+Ctrl+Shift+S (or F7)      Save file As
+Ctrl+S (or F8)            Save file
+Ctrl+E (or F9)            Remote Export
+F2                        Set number of rows
+F3                        Set Rows Per Beat (RPB) [Default = 4]
+                          and Beats Per Bar (BPB) [Default = 4]
+Up/Down/Left/Right        Move cursor
+PgUp/PgDn                 Move cursor 1 bar up/down [Default = 16]
+Home/End                  Move cursor to begining/end
+Ctrl+Left/Right           Move track
+Enter                     Enter keyframe value
+Del                       Delete keyframe
+i                         Enumerate interpolation mode
+k                         Toggle bookmark (not implemented yet)
+Alt+PgUp/PgDn             Go to prev/next bookmark (not implemented yet)
+Space                     Pause/Resume demo
+Shift+Up/Down/Left/Right  Select (not implemented yet)
+Ctrl+C                    Copy (not implemented yet)
+Ctrl+V                    Paste (not implemented yet)
+Ctrl+Z                    Undo
+Ctrl+Y 	                  Redo
+Ctrl+B                    Bias keyframes (not implemented yet)
+Shift+Ctrl+Up/Down        Quick-bias by +/- 0.1 (not implemented yet)
+Ctrl+Up/Down              Quick-bias by +/- 1 (not implemented yet)
+Ctrl+PgUp/PgDn            Quick-bias by +/- 10 (not implemented yet)
+Shift+Ctrl+PgUp/PgDn      Quick-bias by +/- 100 (not implemented yet)

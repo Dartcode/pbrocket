@@ -1,0 +1,167 @@
+Welcome to PBRocket
+===================
+
+PBRocket - a PureBasic port of GNU Rocket - is a sync-tracker, a tool for
+synchronizing audio and visuals in demoscene productions. It consists of a
+library (a single PB include file) that can either communicate with a GUI
+editor through a network connection, or play back an exported data-set.
+The GUI editor has not been ported to PureBasic and was compiled from GNU
+Rocket sources .
+
+The editor is laid out like a music-tracker: tracks (columns) and rows.
+In a music-tracker, each track represents... a track, and each row 
+represents the smallest division (step) of a measure (or bar). In PBRocket, 
+each track represents a separate "variable" in the demo over the entire time-
+domain of the demo. Each row represents a specific point in time, and each 
+row holding a value becomes a keyframe. The values between two keyframes are 
+interpolated over time according to their interpolation modes.
+
+Typically, you will tell PBRocket the tempo of your tune, how many rows per 
+beat you want to use, and the names of the variables you want it to 
+synchronize in your demo. Once this is done, the Sync Editor will create an 
+empty track for each of the variables. These variables can be anything you 
+can think of: camera positions, 3D objects rotations and translations, RGB 
+values, scene change triggers for your scene manager, speed values for your 
+oldskool text scroller, and so on.
+
+
+How does it work?
+-----------------
+
+PBRocket can be run in Edit mode or Player mode.
+
+In Edit mode, PBRocket communicates with the Sync Editor using a network 
+connection in a slave/master fashion: any edit in the Sync Editor (key 
+values, row position and play/pause state) is immediately sent to PBRocket 
+and becomes instantly visible. All the data edited in the Sync Editor can be 
+saved to disk (for further editing) or exported to individual track-data 
+files. 
+
+In Player mode, PBRocket will load all the data in memory (either by reading 
+the exported track-data files from disk or from a DataSection) and will 
+replay them in sync with the audio automatically, without the need to be 
+connected to the Sync Editor.
+
+
+Ok, how do I start?
+-------------------
+
+Just have a look at the included examples, they're rather self-explanatory. 
+Nonetheless, here is a short description of the process:
+
+1. Define a #RKT_SYNC_PLAYER constant with a value of 0 to run PBRocket in 
+   Edit mode. (You'll obviously want to start in Edit mode since all
+   variables are set using the Sync Editor)
+
+2. Include PBRocket.pbi (or PBRocket_BASS.pbi) in your main program.
+
+3. Load an audio file and create an audio callback device, using your audio 
+   file's identifier, the BPM of the audio file, and the RPB you want to use.
+   For instance, a BPM (beats per minute) of 120 and an RPB (row per beat) 
+   value of 8 will give you a resolution of 960 (120*8) keyframes per 
+   minute, or 16 keyframes per second.
+   This audio callback device will be used by the sync device to get (in 
+   both modes) and set (in Edit mode) the current replay position of your 
+   demo.  
+
+4. Create a sync device. The sync device is used to create/retrieve tracks, 
+   add/delete/modify keyframes values, and retrieve the value of the 
+   synchronized variables for the current row.
+
+5. Define the variables you want to synchronize and create a track for each
+   of them. The Sync Editor will either create new empty tracks if they 
+   don't exist in the current rocket file (or if no rocket file was loaded) 
+   or it will start sending previously defined keyframes to the demo if they 
+   already exist in the currently loaded rocket file.
+
+6. Start playing the audio file, and enter the main loop of your demo.
+
+7. Inside your main loop, retrieve the current value of each of your
+   variables and use it as you wish. In Edit mode, you'll also need to 
+   update your sync device to let PBRocket process events from the Sync 
+   Editor.
+
+8. When your demo is over (window is closed), just free your sync device 
+   and you're done.
+
+
+Running the example
+------------------
+
+Open the PureBasic editor and load example.pb from the location where you 
+extracted PBRocket archive.
+
+Run sync_editor.exe. If it's the first time you run it, your firewall will 
+probably ask you if you want to grant Sync Editor access to the network, 
+answer yes.
+
+Load the example.rocket file in Sync Editor. 
+
+Compile and run example.pb. Sync Editor will send all keyframes to the demo 
+program.
+
+Make Sync Editor the active window (click it anywhere) and use the UP and 
+DOWN arrow keys to change the current row. You should see changes happen in 
+real time in your demo program.
+
+Now move the cursor all the way up the tracks to row 0 then press the 
+spacebar on your keyboard. The demo will start playing. Press the spacebar 
+again to pause it.
+
+
+Using a different audio library
+===============================
+
+PBRocket comes in two flavours, yes sir! PBRocket.pbi uses the default 
+PureBasic Sound library and PBRocket_BASS.pbi uses BASS, the audio library 
+from un4seen. BASS itself and the PB API can be downloaded from 
+http://www.un4seen.com. You'll need to put bass.dll and c/bass.lib in the 
+example directory. However, if you insist on using a different audio library 
+you'll need to modify three procedures and adapt them according to your 
+audio library's API.
+
+Procedure.d RKT_audio_get_row(*this.audio_cb)
+  ; use *this\stream as the reference to your audio stream
+  ; you'll need to return the play position in seconds * *this\rowrate
+  ; (in Edit mode, round it up a bit to be visually in sync with the editor)
+  
+  Protected pos.d = getYourSoundPositionInSecs()
+  
+  CompilerIf #RKT_SYNC_PLAYER
+    ProcedureReturn (pos * *this\rowrate)
+  CompilerElse
+    ProcedureReturn (pos * *this\rowrate) + 0.05
+  CompilerEndIf
+EndProcedure
+
+Procedure RKT_audio_set_row(*this.audio_cb, row.i)
+  ; use *this\stream as the reference to your audio stream
+  ; you'll need to set the play position at row / *this\rowrate
+
+  getYourSoundPositionInSecs(row / *this\rowrate)
+
+EndProcedure
+
+Procedure RKT_audio_pause(*this.audio_cb, flag.i)
+  ; use *this\stream as the reference to your audio stream
+  If flag
+    *this\isPlaying = #False 
+    PauseYourSound() 
+  Else 
+    *this\isPlaying = #True 
+    ResumeYourSound() 
+  EndIf
+EndProcedure
+
+If you want to find how many rows are needed for your song, modify this:
+
+Procedure RKT_audio_rows(*this.audio_cb)
+  ; use *this\stream as the reference to your audio stream
+
+  ProcedureReturn Round(getYourAudioLength(), #PB_Round_Up) * *this\rowrate
+
+EndProcedure
+
+
+Have fun!
+---------

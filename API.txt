@@ -1,0 +1,144 @@
+The API
+=======
+
+There are only a few commands you'll need to know in order to use PBRocket:
+
+RKT_create_audiocb()
+--------------------
+
+  Description:
+
+    Creates the audio callback device.
+
+  Syntax:
+
+    RKT_create_audiocb(*device.audio_cb, audio.i, bpm.d, rpb.i)
+
+  Parameters:
+
+    *device.audio_cb : a pointer to a structure of type audio_cb.
+    audio.i : the identifier of your audio file.
+    bpm.d : the BPM of your audio file.
+    rpb.i : the number of Rows Per Beat you want to use.
+    
+    
+RKT_create_device()
+-------------------
+
+  Description:
+
+    Creates the sync device.
+
+  Syntax:
+
+    RKT_create_device(*device.sync_device [, prefix.s [, delay.i]])
+
+  Parameters:
+
+    *device.sync_device : a pointer to a structure of type sync_device.
+    prefix.s : the prefix used to name the exported track files. 
+               Defaults to "sync"
+    delay.i : an initial delay in ms to let PBRocket load all keys. 
+              Defaults to 1000
+
+
+RKT_get_track()
+---------------
+
+  Description:
+
+    Creates a track and loads existing keyframes for that track.
+
+  Syntax:
+
+    Result.sync_track = RKT_get_track(*device.sync_device, name.s)
+
+  Parameters:
+
+    *device.sync_device : a pointer to a structure of type sync_device
+    name.s : the name of the track to create
+
+  Return value:
+
+    Returns a pointer to the track
+
+
+RKT_audio_get_row()
+-------------------
+
+  Description:
+
+    Retrieves the current row value.
+
+  Syntax:
+
+    Result.d = RKT_audio_get_row(*device.audio_cb)
+
+  Parameters:
+
+    *device.audio_cb : a pointer to a structure of type audio_cb
+
+  Return value:
+
+    Returns the current row value as a double.
+
+
+RKT_get_val()
+-------------
+
+  Description:
+
+    Get the value of a track for the current row.
+
+  Syntax:
+
+    Result.d = RKT_get_val(*track.sync_track, row.d)
+
+  Parameters:
+
+    *track.sync_track : a pointer to a previously created track.
+    row.d : the value of the current row.
+
+  Return value:
+
+    Returns the value of the track for the current row as a double.
+
+
+RKT_free_device(rocket)
+-----------------------
+     
+  Description:
+
+    Frees all allocated memory and destroys the device.
+
+  Syntax:
+
+    RKT_free_device(*device.sync_device)
+
+  Parameters:
+
+    *device.sync_device: a pointer to the structure of type sync_device 
+                         you want to deallocate.
+
+PRKT_audio_rows()
+-----------------
+
+  Description:
+
+    Returns the number of rows your sound file will span.
+    Use it to find how many rows you need to set in Sync Editor.
+
+  Syntax:
+
+    PRKT_audio_rows(*device.audio_cb)
+
+  Parameters:
+
+    *device.audio_cb): a pointer to a structure of type audio_cb
+
+  Return value:
+
+    Returns the number of rows needed to match the length of your tune.
+
+
+
