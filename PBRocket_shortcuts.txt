@@ -1,5 +1,12 @@
 /* adapted from https://github.com/kusma/rocket */
 
+PBRocket Editor is a remake of the GNU sync editor.
+It should compile on OSX and linux (not tested) and allows you to customize
+the RPB and BPB values. Also it's a lot prettier than the original :)
+
+However, select/cut/copy/paste and bookmarks aren't implemented yet. 
+
+
 Interpolation modes
 -------------------
 Each keyframe has an interpolation mode associated with it, and that
