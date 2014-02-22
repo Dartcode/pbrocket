@@ -95,7 +95,7 @@ Run sync_editor.exe. If it's the first time you run it, your firewall will
 probably ask you if you want to grant Sync Editor access to the network, 
 answer yes.
 
-Load the example.rocket file in Sync Editor. 
+Load the stars.rocket file in Sync Editor. 
 
 Compile and run example.pb. Sync Editor will send all keyframes to the demo 
 program.
