@@ -4,7 +4,7 @@
 ;            visuals in demoscene productions, to be used with
 ;            PBRocket, a .pbi file to include in your demo.
 ; Author:    Den (Denis Castellan - den@majorden.com)
-;            https://bitbucket.org/Lush/pbrocket/
+;            https://github.com/Dartcode/pbrocket
 ; Copyright: (C) 2014 Denis Castellan
 ;            Ported from GNU Rocket (C) Erik Faye-Lund and Egbert Teeselink
 ;            https://github.com/kusma/rocket
@@ -943,8 +943,7 @@ PBRE_free_undo_redo(undo_manager)
 
 
 ; IDE Options = PureBasic 5.21 LTS (Windows - x86)
-; CursorPosition = 307
-; FirstLine = 233
+; CursorPosition = 6
 ; Folding = Jjg6
 ; EnableUnicode
 ; EnableXP

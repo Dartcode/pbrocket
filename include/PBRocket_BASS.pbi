@@ -4,7 +4,7 @@
 ;            visuals in demoscene productions.
 ;            Requires BASS audio library.
 ; Author:    Den (Denis Castellan - den@majorden.com)
-;            https://bitbucket.org/Lush/pbrocket/
+;            https://github.com/Dartcode/pbrocket
 ; Copyright: (C) 2014 Denis Castellan
 ;            Ported from GNU Rocket (C) Erik Faye-Lund and Egbert Teeselink
 ;            https://github.com/kusma/rocket
@@ -701,8 +701,7 @@ Procedure RKT_free_device(*this.sync_device)
 EndProcedure
 
 ; IDE Options = PureBasic 5.21 LTS (Windows - x86)
-; CursorPosition = 630
-; FirstLine = 627
+; CursorPosition = 6
 ; Folding = ------
 ; EnableXP
 ; DisableDebugger
