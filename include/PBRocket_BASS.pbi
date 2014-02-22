@@ -628,7 +628,7 @@ CompilerIf Not #RKT_SYNC_PLAYER
   Procedure RKT_sync_connect(*this.sync_device)
     Protected loop.i = 0
     
-    *this\connection = OpenNetworkConnection("localhost", 1338, #PB_Network_TCP, 1000)
+    *this\connection = OpenNetworkConnection("127.0.0.1", 1338, #PB_Network_TCP, 1000)
     
     If *this\connection
       *this\outBuffer = AllocateMemory(1000)
@@ -701,8 +701,8 @@ Procedure RKT_free_device(*this.sync_device)
 EndProcedure
 
 ; IDE Options = PureBasic 5.21 LTS (Windows - x86)
-; CursorPosition = 701
-; FirstLine = 665
+; CursorPosition = 630
+; FirstLine = 627
 ; Folding = ------
 ; EnableXP
 ; DisableDebugger

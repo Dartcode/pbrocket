@@ -619,7 +619,7 @@ EndProcedure
 
 Procedure RKT_create_server(*this.sync_device)
   InitNetwork()
-  *this\server = CreateNetworkServer(#PB_Any, 1338, #PB_Network_TCP)
+  *this\server = CreateNetworkServer(#PB_Any, 1338, #PB_Network_TCP, "127.0.0.1")
   If *this\server
     *this\outBuffer = AllocateMemory(#RKT_BUFFER_OUT)
     *this\inBuffer = AllocateMemory(#RKT_BUFFER_IN)
@@ -716,8 +716,8 @@ Procedure RKT_dump(*this.sync_device)
 EndProcedure
 
 ; IDE Options = PureBasic 5.21 LTS (Windows - x86)
-; CursorPosition = 124
-; FirstLine = 99
+; CursorPosition = 621
+; FirstLine = 619
 ; Folding = ------
 ; EnableUnicode
 ; EnableXP
