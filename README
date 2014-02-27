@@ -1,12 +1,16 @@
 Welcome to PBRocket
 ===================
 
+Update: here's a short YouTube video showing a demo and the editor
+side by side: https://www.youtube.com/watch?v=Sb34lU7c4KU
+
 PBRocket - a PureBasic port of GNU Rocket - is a sync-tracker, a tool for
 synchronizing audio and visuals in demoscene productions. It consists of a
 library (a single PB include file) that can either communicate with a GUI
 editor through a network connection, or play back an exported data-set.
-The GUI editor has not been ported to PureBasic and was compiled from GNU
-Rocket sources .
+The GUI editor has also been ported to PureBasic, but lacks a few features.
+The original GUI editor (compiled from GNU Rocket sources) is also available
+in the Downloads folder.
 
 The editor is laid out like a music-tracker: tracks (columns) and rows.
 In a music-tracker, each track represents... a track, and each row 
